@@ -2,6 +2,7 @@ DOCKER_NETWORK = database
 ENV_FILE = hadoop.env
 current_branch = database
 build:
+	docker build -t lujiefsi/atlas:$(current_branch) ./atlas
 	docker build -t lujiefsi/hbase-base:$(current_branch) ./hbase
 	docker build -t lujiefsi/hbase-master:$(current_branch) ./hmaster
 	docker build -t lujiefsi/hbase-regionserver:$(current_branch) ./hregionserver

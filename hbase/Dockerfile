@@ -1,5 +1,6 @@
+FROM wbaa/rokku-dev-apache-atlas as atlas
+
 FROM openjdk:8
-MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends net-tools curl netcat python
 
@@ -34,6 +35,11 @@ ENV HBASE_CONF_DIR=/etc/hbase
 ENV USER=root
 ENV PATH $HBASE_PREFIX/bin/:$PATH
 RUN cp $PHOENIX_HOME/phoenix-server-hbase-2.4.0-5.1.2.jar $HBASE_PREFIX/lib
+
+COPY --from=atlas /opt/atlas/hook/hbase/ /opt/hbase-$HBASE_VERSION/lib
+#COPY --from=atlas /opt/apache-atlas-hbase-hook-2.2.0/hook/hbase/hbase-bridge-shim-2.2.0.jar /opt/hbase-$HBASE_VERSION/lib
+#COPY --from=atlas /opt/apache-atlas-hbase-hook-2.2.0/hook/hbase/atlas-hbase-plugin-impl /opt/hbase-$HBASE_VERSION/lib
+ADD atlas-application.properties /opt/hbase-$HBASE_VERSION/conf/atlas-application.properties
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod a+x /entrypoint.sh
