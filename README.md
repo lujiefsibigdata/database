@@ -1,22 +1,20 @@
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/big-data-europe/Lobby)
 
-# docker-hbase
+# DataBase
 
-# Standalone
-To run standalone hbase:
+启动database
 ```
-docker-compose -f docker-compose-standalone.yml up -d
+sudo docker-compose up -d
 ```
-The deployment is the same as in [quickstart HBase documentation](https://hbase.apache.org/book.html#quickstart).
-Can be used for testing/development, connected to Hadoop cluster.
+查看各个节点的状态：
 
-# Local distributed
-To run local distributed hbase:
 ```
-docker-compose -f docker-compose-distributed-local.yml up -d
+sudo docker-compose ps
 ```
 
-This deployment will start Zookeeper, HMaster and HRegionserver in separate containers.
+如果节点状态不健康：
 
-# Distributed
-To run distributed hbase on docker swarm see this [doc](./distributed/README.md):
+```
+docker inspect --format '{{json .State.Health}}' kms #  假设kms为不健康的节点
+```
+
