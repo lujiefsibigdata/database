@@ -115,9 +115,6 @@ services:
       SERVICE_PRECONDITION: "solr:8983 zookeeper:2181 kafka:9092 hbase-master:16010 hbase-region:16030"
     ports:
       - "21000:21000"
-    depends_on:
-      - solr
-
   kafka:
     container_name: kafka
     image: wurstmeister/kafka
