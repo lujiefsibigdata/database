@@ -1,4 +1,4 @@
-FROM wbaa/rokku-dev-apache-atlas as atlas
+FROM lujiefsi/atlas:database as atlas
 
 FROM openjdk:8
 
