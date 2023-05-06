@@ -2,6 +2,11 @@
 
 # DataBase
 
+编译
+```
+make
+```
+
 启动database
 ```
 sudo docker-compose up -d
