@@ -1,15 +1,16 @@
-FROM maven:3.5.4-jdk-8 AS stage-atlas
-ENV	MAVEN_OPTS "-Xms2g -Xmx2g"
+#FROM maven:3.5.4-jdk-8 AS stage-atlas
+#ENV	MAVEN_OPTS "-Xms2g -Xmx2g"
 
 
-ADD https://archive.apache.org/dist/atlas/2.2.0/apache-atlas-2.2.0-sources.tar.gz /
+#ADD https://archive.apache.org/dist/atlas/2.2.0/apache-atlas-2.2.0-sources.tar.gz /
 
-RUN tar -zxvf /apache-atlas-2.2.0-sources.tar.gz -C /
-RUN cd /apache-atlas-sources-2.2.0 && mvn clean -DskipTests package -Pdist,embedded-hbase-solr &&  mv distro/target/apache-atlas-*-bin.tar.gz /apache-atlas.tar.gz
+#RUN tar -zxvf /apache-atlas-2.2.0-sources.tar.gz -C /
+#RUN cd /apache-atlas-sources-2.2.0 && mvn clean -DskipTests package -Pdist,embedded-hbase-solr &&  mv distro/target/apache-atlas-*-bin.tar.gz /apache-atlas.tar.gz
 
-FROM centos:7
+FROM public.ecr.aws/docker/library/centos:7
 
-COPY --from=stage-atlas /apache-atlas.tar.gz /apache-atlas.tar.gz
+#COPY --from=stage-atlas /apache-atlas.tar.gz /apache-atlas.tar.gz
+COPY apache-atlas-2.2.0-bin.tar.gz /apache-atlas.tar.gz
 
 RUN groupadd hadoop && \
 	useradd -m -d /opt/atlas -g hadoop atlas

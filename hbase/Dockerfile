@@ -1,6 +1,6 @@
 FROM lujiefsi/atlas:database as atlas
 
-FROM openjdk:8
+FROM public.ecr.aws/docker/library/openjdk:8
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends net-tools curl netcat python
 
