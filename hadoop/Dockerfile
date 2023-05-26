@@ -3,6 +3,15 @@ FROM debian
 MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
 MAINTAINER Giannis Mouchakis <gmouchakis@iit.demokritos.gr>
 
+#RUN echo "deb http://mirrors.ustc.edu.cn/debian stable main contrib non-free" >> /etc/apt/sources.list
+# deb-src http://mirrors.ustc.edu.cn/debian stable main contrib non-free
+#RUN echo "deb http://mirrors.ustc.edu.cn/debian stable-updates main contrib non-free" >> /etc/apt/sources.list
+RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+# deb-src http://mirrors.ustc.edu.cn/debian stable-updates main contrib non-free
+
+# deb http://mirrors.ustc.edu.cn/debian stable-proposed-updates main contrib non-free
+# deb-src http://mirrors.ustc.edu.cn/debian stable-proposed-updates main contrib non-free
+
 #RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse" > /etc/apt/sources.list \
 #    && echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse" >> /etc/apt/sources.list \
 #    && echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse" >> /etc/apt/sources.list \
